@@ -13,7 +13,7 @@ use File::Copy;
 #####################
 use constant VERSION => 1.2;
 use constant NCBI_FTP => "ftp.ncbi.nlm.nih.gov";
-use constant BLAST_DB_DIR => "/blast/db";
+use constant BLAST_DB_DIR => "/blast/db/v4/";
 use constant USER => "anonymous";
 use constant PASSWORD => "anonymous";
 use constant DEBUG => 0;
@@ -30,7 +30,7 @@ my $compressedDownloads = "/home/a-m/datamover/no_backup/TEMP_NCBI_DBS";
 my $uncompressedDownloads = "/home/a-m/datamover/no_backup/TEMP_NCBI_DBS_EXTRACTED";
 
 #The parent directory where we store all the databases by download date
-my $blastDbsDir = "/home/mirrors/NCBI/BLAST_DBS";
+my $blastDbsDir = "/private_stores/mirror/ncbi-blastdb";
 
 
 # Process command line options for FTP
@@ -143,9 +143,9 @@ if($fileStatus==0)
 	system("ln -s ".$finalDirName." ".$blastDbsDir."/latest");
 
 	#latest file so programs can tell which folder is the latest
-	open(LATESTFILE,">".$blastDbsDir."/latest.txt");
-	print LATESTFILE $dateDir;
-	close(LATESTFILE);
+	#open(LATESTFILE,">".$blastDbsDir."/latest.txt");
+	#print LATESTFILE $dateDir;
+	#close(LATESTFILE);
 
 	#Send e-mail to notify admin of successful update
         print "Send email of success";

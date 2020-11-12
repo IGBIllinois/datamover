@@ -28,23 +28,23 @@ chdir($currentReleaseDir);
 my $workingDir = getcwd;
 #print "Current Directory: $workingDir\n";
 
-my $blastDir = $currentReleaseDir . "blast\/";
-my $blastPlusDir =  $currentReleaseDir . "blast+\/";
-my $fastaDir =  $currentReleaseDir . "fasta\/";
+#my $blastDir = $currentReleaseDir . "blast\/";
+#my $blastPlusDir =  $currentReleaseDir . "blast+\/";
+#my $fastaDir =  $currentReleaseDir . "fasta\/";
 
 #################################################################
 # Check file directories.
 #################################################################
-  unless(-d $blastDir){ 
-      my $cmd = "mkdir $blastDir";
-      system ("mkdir $blastDir");
-  }
-  unless(-d $blastPlusDir){
-      system ("mkdir $blastPlusDir");
-   }
-   unless(-d $fastaDir){
-      system ("mkdir $fastaDir");
-   }
+#  unless(-d $blastDir){ 
+#      my $cmd = "mkdir $blastDir";
+#      system ("mkdir $blastDir");
+#  }
+#  unless(-d $blastPlusDir){
+#      system ("mkdir $blastPlusDir");
+#   }
+#   unless(-d $fastaDir){
+#      system ("mkdir $fastaDir");
+#   }
    unless(-d $currentReleaseDir){
       system ("mkdir $currentReleaseDir");
    }
@@ -187,9 +187,9 @@ sub getTimeStamp{
 ######################################################################
 sub clearFiles{
    system("rm -f $currentReleaseDir\*.gz");
-   system("rm -f $blastDir\*.*");
-   system("rm -f $blastPlusDir\*.*");
-   system("rm -f $fastaDir\*.*");
+   #system("rm -f $blastDir\*.*");
+   #system("rm -f $blastPlusDir\*.*");
+   #system("rm -f $fastaDir\*.*");
 }
 ####################################################
 #move current release to an old release

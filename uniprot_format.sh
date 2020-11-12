@@ -26,11 +26,8 @@ if [ -d $UNIPROT_DIR ]; then
 			DB_NAME=`basename $FASTA_NAME .fasta`
 			#Blast+ Indexing
 			module load blast+
-			makeblastdb -dbtype prot -in $UNIPROT_DIR/$FASTA_NAME -out $UNIPROT_DIR/blast+/$DB_NAME
+			makeblastdb -dbtype prot -in $UNIPROT_DIR/$FASTA_NAME -out $UNIPROT_DIR/$DB_NAME
 			module purge
-			#Blast Indexing
-			module load blast
-			formatdb -p T -i $UNIPROT_DIR/$FASTA_NAME -n $UNIPROT_DIR/blast/$DB_NAME
 		fi
 	done
 else
