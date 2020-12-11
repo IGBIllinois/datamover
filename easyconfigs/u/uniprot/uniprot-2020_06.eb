@@ -17,8 +17,9 @@ sanity_check_paths = {
 		'db/idmapping.dat.',
 		'db/uniref100.fasta',
 		'db/uniref90.fasta',
-		'db/uniref50.fasta'],
-        'dirs': ['db','blastdb_v4','blastdb_v5','diamond','bowtie,'bowtie2'],
+		'db/uniref50.fasta'
+	],
+        'dirs': ['db','blastdb_v4','blastdb_v5','diamond','bowtie','bowtie2']
 }
 
 modextrapaths = {'BIODB':'db',
