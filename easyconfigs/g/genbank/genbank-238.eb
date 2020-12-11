@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'genbank'
+version = '238'
+
+homepage = 'https://www.ncbi.nlm.nih.gov/genbank/'
+description = """GenBank ® is the NIH genetic sequence database, an annotated collection of all publicly available DNA sequences"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://ftp.ncbi.nlm.nih.gov/genbank/']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['gbvrt1.seq'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

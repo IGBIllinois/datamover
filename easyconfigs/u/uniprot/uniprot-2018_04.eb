@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'uniprot'
+version = '2018_04'
+
+homepage = 'https://www.uniprot.org/'
+description = """The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information. """
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['uniprot_sprot.fasta'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':'db'
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database and indexes are located at %(installdir)s/\n"
+

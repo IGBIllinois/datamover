@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'card-prevalence'
+version = '3.0.6'
+
+homepage = 'https://card.mcmaster.ca'
+description = """November 2019 release - 85 pathogens, 116914 resistomes, and 182532 AMR allele sequences based on sequence data acquired from NCBI on July 31, 2019, analyzed using RGI 5.0.0 (DIAMOND homolog detection) and CARD 3.0.7. Includes pre-compiled k-mer classifier data for pathogen-of-origin prediction."""
+
+toolchain = SYSTEM
+
+#source_urls = ['https://card.mcmaster.ca/download/6/']
+#sources = ['prevalence-v%(version)s.tar.bz2']
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['fasta/nucleotide_fasta_protein_homolog_model_variants.fasta'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

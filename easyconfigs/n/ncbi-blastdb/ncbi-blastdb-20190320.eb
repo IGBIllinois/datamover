@@ -1,0 +1,30 @@
+easyblock = 'Bundle'
+
+name = 'ncbi-blastdb'
+version = '20190320'
+
+homepage = 'ftp://ftp.ncbi.nlm.nih.gov/blast/db/'
+description = """"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+configopts = ''
+sanity_check_paths = {
+        'files': ['nr.00.phd'],
+        'dirs': [],
+}
+
+
+modextrapaths = {'BIODB':'',
+	'BLASTDB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"

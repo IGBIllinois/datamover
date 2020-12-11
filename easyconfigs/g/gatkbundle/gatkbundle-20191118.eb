@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'gatkbundle'
+version = '20191118'
+
+homepage = 'https://software.broadinstitute.org/gatk/download/bundle'
+description = """he GATK resource bundle is a collection of standard files for working with human resequencing data with the GATK. We provide several versions of the bundle corresponding to the various reference builds,"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['hg38/1000G_omni2.5.hg38.vcf'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

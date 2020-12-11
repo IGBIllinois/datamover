@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'clusterblast'
+version = '20170105'
+
+homepage = 'http://www.molgen.ua.ac.be/bioinfo/projects/clusterblast/clusterblast.htm'
+description = """"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['geneclusterprots.fasta'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
