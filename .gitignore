@@ -1,0 +1,7 @@
+*.tar.gz
+*.zip
+*.tgz
+*.jar
+*.whl
+*.rpm
+*.out
