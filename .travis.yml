@@ -4,6 +4,8 @@ python:
     - "3.6"
     - "3.7"
 
+install:
+    - echo "" > /dev/null
 
 script:
     - if find . -name "*.eb" -exec python -c "__import__('compiler').parse(open('{}').read())" 2>&1 \; | grep "SyntaxError"; then exit 1; fi
