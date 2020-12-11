@@ -7,6 +7,7 @@
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J uniprot_indexes
+#SBATCH -D /home/a-m/datamover/jobs
 # ----------------Load Modules--------------------
 module load BLAST+/2.10.1-IGB-gcc-8.2.0
 module load Bowtie/1.3.0-IGB-gcc-8.2.0
