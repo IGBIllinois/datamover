@@ -1,13 +1,14 @@
 #!/bin/bash
 # ----------------SLURM Parameters----------------
-#SBATCH -p admin
-#SBATCH -n 4
-#SBATCH --mem=40g
+#SBATCH -p normal
+#SBATCH -n 16
+#SBATCH --mem=256g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J uniprot_indexes
 #SBATCH -D /home/a-m/datamover/jobs
+#SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
 module load BLAST+/2.10.1-IGB-gcc-8.2.0
 module load Bowtie/1.3.0-IGB-gcc-8.2.0
@@ -23,15 +24,24 @@ then
         exit 1;
 fi
 
-UNIPROT_VERSION=$1
-UNIPROT_DIR=/private_stores/mirror/uniprot
-FASTA_DIR=$UNIPROT_DIR/$UNIPROT_VERSION/db
-BLASTV4_DIR=$UNIPROT_DIR/$UNIPROT_VERSION/blastdb_v4
-BLASTV5_DIR=$UNIPROT_DIR/$UNIPROT_VERSION/blastdb_v5
-DIAMOND_DIR=$UNIPROT_DIR/$UNIPROT_VERSION/diamond
-BOWTIE_DIR=$UNIPROT_DIR/$UNIPROT_VERSION/bowtie
-BOWTIE2_DIR=$UNIPROT_DIR/$UNIPROT_VERSION/bowtie2
+VERSION=$1
+MIRROR_DIR=/private_stores/mirror/uniprot
+FASTA_DIR=$MIRROR_DIR/$VERSION/db
+BLASTV4_DIR=$MIRROR_DIR/$VERSION/blastdb_v4
+BLASTV5_DIR=$MIRROR_DIR/$VERSION/blastdb_v5
+DIAMOND_DIR=$MIRROR_DIR/$VERSION/diamond
+DIAMOND_OPTS="--quiet --threads $SLURM_NTASKS"
+BOWTIE_DIR=$MIRROR_DIR/$VERSION/bowtie
+BOWTIE_OPTS="--large-index --threads $SLURM_NTASKS"
+BOWTIE2_DIR=$MIRROR_DIR/$VERSION/bowtie2
+BOWTIE2_OPTS="--large-index --threads $SLURM_NTASKS"
 
+
+if [ ! -d $FASTA_DIR ]
+then
+        echo "$FASTA_DIR does not exist"
+        exit 1
+fi
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Started Blast Indexing"
 
@@ -46,11 +56,13 @@ for f in $FASTA_DIR/*.fasta
 do
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Indexes for File: $f"
 
-	#Make blast v4 indexes
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v4 Index for File: $f"
 	FASTA_NAME=`basename $f`
 	DB_NAME=`basename $f .fasta`
-	makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
+	
+	#Make blast v4 indexes
+        echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v4 Index for File: $f"
+
+	#makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
 	if [ $? -ne 0 ]; then
 		echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating Blast v4 index for file: $f"
 		exit 1
@@ -60,7 +72,7 @@ do
 
 	#Make blast v5 indexes
         echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v5 Index for File: $f"
-	makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV5_DIR/$DB_NAME -blastdb_version 5
+	#makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV5_DIR/$DB_NAME -blastdb_version 5
         if [ $? -ne 0 ]; then
                 echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating Blast v5 index for file: $f"
                 exit 1
@@ -70,7 +82,7 @@ do
 
 	#Make Diamond indexes
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating diamond Index for File: $f"
-        makedb $f $DIAMOND_DIR/$DB_NAME.dmnd
+        #diamond makedb $DIAMOND_OPTS --in $f --db $DIAMOND_DIR/$DB_NAME
         if [ $? -ne 0 ]; then
                 echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating diamond index for file: $f"
                 exit 1
@@ -83,9 +95,9 @@ do
 	#Make bowtie indexes
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating bowtie Index for File: $f"
 	
-        bowtie-build --threads $SLURM_NTASKS $f $BOWTIE_DIR/$DB_NAME
+        bowtie-build $BOWTIE_OPTS $f $BOWTIE_DIR/$DB_NAME
         if [ $? -ne 0 ]; then
-                echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating bowtie2 index for file: $f"
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating bowtie index for file: $f"
                 exit 1
         else
                 echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating bowtie Index for File: $f"
@@ -94,7 +106,7 @@ do
 
 	#Make bowtie2 indexes
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating bowtie2 Index for File: $f"
-        bowtie2-build --threads $SLURM_NTASKS $f $BOWTIE2_DIR/$DB_NAME 
+        bowtie2-build $BOWTIE2_OPTS $f $BOWTIE2_DIR/$DB_NAME 
         if [ $? -ne 0 ]; then
                 echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating bowtie2 index for file: $f"
                 exit 1
