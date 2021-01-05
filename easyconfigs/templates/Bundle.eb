@@ -15,10 +15,13 @@ dependencies = []
 
 sanity_check_paths = {
         'files': [],
-        'dirs': [],
+        'dirs': ['db','blastdb_v4','blastdb_v5','diamond'],
 }
 
-modextrapaths = {'BIODB':''
+modextrapaths = {
+	'BIODB':''
+	'BLASTDB': ['blastdb_v4','blastdb_v5'],
+        'DIAMONDDB': 'diamond',
 }
 
 keeppreviousinstall = True

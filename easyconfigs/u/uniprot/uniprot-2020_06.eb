@@ -14,17 +14,15 @@ dependencies = []
 sanity_check_paths = {
         'files': ['db/uniprot_sprot.fasta',
 		'db/uniprot_trembl.fasta',
-		'db/idmapping.dat.',
+		'db/idmapping.dat',
 		'db/uniref100.fasta',
 		'db/uniref90.fasta',
 		'db/uniref50.fasta'
 	],
-        'dirs': ['db','blastdb_v4','blastdb_v5','diamond','bowtie','bowtie2']
+        'dirs': ['db','blastdb_v4','blastdb_v5','diamond']
 }
 
 modextrapaths = {'BIODB':'db',
-	'BOWTIE2_INDEXES': 'bowtie2',
-	'BOWTIE_INDEXES': 'bowtie',
 	'BLASTDB': ['blastdb_v4','blastdb_v5'],
 	'DIAMONDDB': 'diamond',
 }

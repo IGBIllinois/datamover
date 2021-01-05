@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J ncbi-blast_download
+#SBATCH -J ncbi-blastdb_download
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
@@ -46,7 +46,7 @@ echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading fasta files Complete"
 echo "`date "+%Y-%m-%d %k:%M:%S"` Verifying fasta md5sum"
 for f in $FASTA_DIR/*.gz
 do
-	md5sum --check $f.md5
+	cd $FASTA_DIR && md5sum --check $f.md5
 	if [ $? -ne 0 ]; then
 	        echo "`date "+%Y-%m-%d %k:%M:%S"` Error md5sum file: $f"
 	       	exit 1

@@ -2,11 +2,11 @@
 # ----------------SLURM Parameters----------------
 #SBATCH -p normal
 #SBATCH -n 8
-#SBATCH --mem=128g
+#SBATCH --mem=125g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J uniprot_indexes
+#SBATCH -J ncbi-blastdb_indexes
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
@@ -18,17 +18,21 @@ module load DIAMOND/0.9.24-IGB-gcc-8.2.0
 
 if [ -z "$1" ];
 then
-        echo "Please specify uniprot version number";
+        echo "Please specify ncbi blastdb version number";
         exit 1;
 fi
 
 VERSION=$1
-MIRROR_DIR=/private_stores/mirror/uniprot
+MIRROR_DIR=/private_stores/mirror/ncbi-blastdb
 FASTA_DIR=$MIRROR_DIR/$VERSION/db
 BLASTV4_DIR=$MIRROR_DIR/$VERSION/blastdb_v4
-BLASTV5_DIR=$MIRROR_DIR/$VERSION/blastdb_v5
 DIAMOND_DIR=$MIRROR_DIR/$VERSION/diamond
 DIAMOND_OPTS="--quiet --threads $SLURM_NTASKS"
+
+FILES="$FASTA_DIR/nr
+$FASTA_DIR/nt
+$FASTA_DIR/pdbaa
+$FASTA_DIR/swissprot"
 
 
 if [ ! -d $FASTA_DIR ]
@@ -40,10 +44,9 @@ fi
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Directories"
 mkdir -p $BLASTV4_DIR
-mkdir -p $BLASTV5_DIR
 mkdir -p $DIAMOND_DIR
 
-for f in $FASTA_DIR/*.fasta
+for f in $FILES
 do
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Indexes for File: $f"
 
@@ -52,24 +55,17 @@ do
 	
 	#Make blast v4 indexes
         echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v4 Index for File: $f"
-
-	makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
+	if [ `basename $f` == 'nt' ]; then
+		makeblastdb -dbtype nucl -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
+	else
+		makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
+	fi
 	if [ $? -ne 0 ]; then
 		echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating Blast v4 index for file: $f"
 		exit 1
 	else
 		echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating Blast v4 Index for File: $f"
 	fi
-
-	#Make blast v5 indexes
-        echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v5 Index for File: $f"
-	makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV5_DIR/$DB_NAME -blastdb_version 5
-        if [ $? -ne 0 ]; then
-                echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating Blast v5 index for file: $f"
-                exit 1
-        else
-                echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating Blast v5 Index for File: $f"
-        fi
 
 	#Make Diamond indexes
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating diamond Index for File: $f"
@@ -79,6 +75,16 @@ do
                 exit 1
         else
                 echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating diamond Index for File: $f"
+        fi
+
+        #Make bowtie indexes
+        echo "`date "+%Y-%m-%d %k:%M:%S"` Creating bowtie Index for File: $f"
+        bowtie-build $BOWTIE_OPTS $f $BOWTIE_DIR/$DB_NAME
+        if [ $? -ne 0 ]; then
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating bowtie index for file: $f"
+                exit 1
+        else
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating bowtie Index for File: $f"
         fi
 
 
