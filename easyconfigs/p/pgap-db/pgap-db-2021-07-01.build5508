@@ -1,0 +1,29 @@
+easyblock = 'Tarball'
+
+name = 'pgap-db'
+version = '2021-07-01.build5508'
+
+homepage = ''
+description = """"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://s3.amazonaws.com/pgap/']
+sources = ['input-%(version)s.tgz']
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['16S_rRNA','23S_rRNA','uniColl_path'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

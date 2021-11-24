@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 use strict;
 
@@ -8,12 +8,12 @@ my $bioc_exclude="--exclude='bin'";
 my $cran_dir="/private_stores/mirror/R/cran";
 my $cran_exclude="--exclude='bin'";
 
-my @bioc_versions = ('3.3','3.4','3.5','3.7','3.8','3.9','3.10','3.12');
+my @bioc_versions = ('3.8','3.9','3.10','3.12','3.14');
 
 foreach my $version (@bioc_versions) {
 	
 	#Rsync the files
-	my $command ="rsync -zrtlv --delete $bioc_exclude master.bioconductor.org::$version $bioc_dir/packages/$version";
+	my $command ="rsync -e 'ssh -i ~/.ssh/id_rsa' -zrtlv --delete $bioc_exclude bioc-rsync\@master.bioconductor.org:$version $bioc_dir/packages/$version";
 	print $command . "\n";
 	system($command);
 

@@ -1,0 +1,29 @@
+easyblock = 'Bundle'
+
+name = 'silva'
+version = '138.1'
+
+homepage = 'https://www.arb-silva.de'
+description = """SILVA provides comprehensive, quality checked and regularly updated datasets of aligned small (16S/18S, SSU) and large subunit (23S/28S, LSU) ribosomal RNA (rRNA) sequences for all three domains of life (Bacteria, Archaea and Eukarya)."""
+
+toolchain = SYSTEM
+
+source_urls = ['ftp://ftp.arb-silva.de/release_138_1/']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['ARB_files','Exports'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
