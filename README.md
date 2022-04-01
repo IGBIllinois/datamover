@@ -1,6 +1,6 @@
 # Databases Easyconfigs
 
-[![Build Status](https://www.travis-ci.com/IGBIllinois/datamover.svg?branch=master)](https://www.travis-ci.com/IGBIllinois/datamover)
+[![Build Status](https://github.com/IGBIllinois/datamover/actions/workflows/main.yml/badge.svg)](https://github.com/IGBIllinois/datamover/actions/workflows/main.yml)
 
 IGB Biocluster Easybuild Easyconfigs for Databases
 * These are used on the IGB Biocluster [http://biocluster.igb.illinois.edu](http://biocluster.igb.illinois.edu)
