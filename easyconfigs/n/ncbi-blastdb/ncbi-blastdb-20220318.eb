@@ -1,0 +1,35 @@
+easyblock = 'Bundle'
+
+name = 'ncbi-blastdb'
+version = '20220318'
+
+homepage = 'ftp://ftp.ncbi.nlm.nih.gov/blast/db/'
+description = """BLAST search pages under the Basic BLAST section of the NCBI BLAST home page
+(http://blast.ncbi.nlm.nih.gov/) use a standard set of BLAST databases for 
+nucleotide, protein, and translated BLAST searches."""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['db/nr','db/nt','db/pdbaa','db/swissprot','db/taxdb.btd'],
+        'dirs': ['db','blastdb_v4','blastdb_v5','diamond'],
+}
+
+modextrapaths = {
+        'BIODB':'',
+        'BLASTDB': ['blastdb_v4','blastdb_v5'],
+        'DIAMONDDB': 'diamond',
+}
+
+keeppreviousinstall = True
+
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"

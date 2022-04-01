@@ -77,16 +77,6 @@ do
                 echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating diamond Index for File: $f"
         fi
 
-        #Make bowtie indexes
-        echo "`date "+%Y-%m-%d %k:%M:%S"` Creating bowtie Index for File: $f"
-        bowtie-build $BOWTIE_OPTS $f $BOWTIE_DIR/$DB_NAME
-        if [ $? -ne 0 ]; then
-                echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating bowtie index for file: $f"
-                exit 1
-        else
-                echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating bowtie Index for File: $f"
-        fi
-
 
 done
 echo "`date "+%Y-%m-%d %k:%M:%S"` Finshed"

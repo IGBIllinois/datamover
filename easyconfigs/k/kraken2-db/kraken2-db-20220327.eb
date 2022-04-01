@@ -1,0 +1,29 @@
+easyblock = 'Bundle'
+
+name = 'kraken2-db'
+version = '20220327'
+
+homepage = 'https://ccb.jhu.edu/software/kraken/'
+description = """Kraken is a system for assigning taxonomic labels to short DNA sequences, usually obtained through metagenomic studies. """
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['hash.k2d','seqid2taxid.map'],
+        'dirs': ['library','taxonomy'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
