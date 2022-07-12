@@ -15,7 +15,7 @@ dependencies = []
 
 sanity_check_paths = {
         'files': [],
-        'dirs': ['db'],
+        'dirs': ['db/archaea','db/bacteria'],
 }
 
 modextrapaths = {

@@ -1,0 +1,30 @@
+easyblock = 'Bundle'
+
+name = 'funannotate-db'
+version = '20220428'
+
+homepage = 'https://github.com/nextgenusfs/funannotate'
+description = """funannotate is a pipeline for genome annotation (built specifically for fungi, but will also work with higher eukaryotes). Installation, usage, and more information can be found at http://funannotate.readthedocs.io"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['uniprot.dmnd'],
+        'dirs': [],
+}
+
+modextrapaths = {
+	'BIODB':'',
+	'FUNANNOTATE_DB': ''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
