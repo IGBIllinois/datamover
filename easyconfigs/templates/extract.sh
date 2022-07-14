@@ -31,17 +31,17 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
 
-pigz -p $SLURM_NTASKS -r $MIRROR_DIR
+pigz -p ${SLURM_NTASKS} -r ${MIRROR_DIR}
 if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
-	exit 1
+	exit $?
 else
-	echo "Extracting Files Complete: `date "+%Y-%m-%d %k:%M:%S"`"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files Complete"
 fi
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Fix Permissions Start"
-find $MIRROR_DIR -type d -exec chmod 775 {} \;
-find $MIRROR_DIR -type f -exec chmod 664 {} \;
+find ${MIRROR_DIR} -type d -exec chmod 775 {} \;
+find ${MIRROR_DIR} -type f -exec chmod 664 {} \;
 echo "`date "+%Y-%m-%d %k:%M:%S"` Fix Permissions Completed"
 

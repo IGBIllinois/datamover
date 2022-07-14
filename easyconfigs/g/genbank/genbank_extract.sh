@@ -25,12 +25,17 @@ MIRROR_DIR=/private_stores/mirror/genbank
 
 echo "Extracting Files: `date "+%Y-%m-%d %k:%M:%S"`"
 
-gunzip -r $MIRROR_DIR
-
-echo "Extracting Files Complete: `date "+%Y-%m-%d %k:%M:%S"`"
+pigz -p ${SLURM_NTASKS} -r ${MIRROR_DIR}
+if [ $? -ne 0 ]
+then
+        echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
+        exit $?
+else
+        echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files Complete"
+fi
 
 echo "Fix Permissions Start: `date "+%Y-%m-%d %k:%M:%S"`"
-find $MIRROR_DIR -type d -exec chmod 775 {} \;
-find $MIRROR_DIR -type f -exec chmod 664 {} \;
+find ${MIRROR_DIR} -type d -exec chmod 775 {} \;
+find ${MIRROR_DIR} -type f -exec chmod 664 {} \;
 echo "Fix Permissions Completed: `date "+%Y-%m-%d %k:%M:%S"`"
 

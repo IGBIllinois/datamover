@@ -1,7 +1,7 @@
 #!/bin/bash
 # ----------------SLURM Parameters----------------
 #SBATCH -p admin
-#SBATCH -n 4
+#SBATCH -n 1
 #SBATCH --mem=20g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
@@ -28,11 +28,12 @@ VERSION=$1
 MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files"
-mkdir -p $MIRROR_DIR
-rsync -av rsync://WEBSITE/${VERSION}/ $MIRROR_DIR/
+mkdir -p ${MIRROR_DIR}
+rsync -av rsync://WEBSITE/${VERSION}/ ${MIRROR_DIR}/
 if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
+	exit $?
 else
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Complete"
 fi

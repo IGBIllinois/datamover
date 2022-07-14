@@ -1,7 +1,7 @@
 #!/bin/bash
 # ----------------SLURM Parameters----------------
 #SBATCH -p admin
-#SBATCH -n 4
+#SBATCH -n 1
 #SBATCH --mem=20g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
