@@ -24,7 +24,7 @@ MIRROR_DIR=/private_stores/mirror/pfam/$VERSION
 echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files"
 mkdir -p $MIRROR_DIR
 rsync -av rsync://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${VERSION}/ $MIRROR_DIR/
-if [ $? -eq 0 ]
+if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
 else

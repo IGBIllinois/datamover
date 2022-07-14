@@ -30,7 +30,7 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files"
 mkdir -p $MIRROR_DIR
 rsync -av rsync://WEBSITE/${VERSION}/ $MIRROR_DIR/
-if [ $? -eq 0 ]
+if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
 else
