@@ -17,7 +17,7 @@ module load pigz/2.4-IGB-gcc-8.2.0
 # Replace WEBSITE with remote location of database#
 #
 
-DATABSE="example"
+DATABSE="interpro"
 
 if [ -z "$1" ];
 then

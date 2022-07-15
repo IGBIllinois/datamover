@@ -25,7 +25,7 @@ MIRROR_DIR=/private_stores/mirror/pfam/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
 
-pigz -p $SLURM_NTASKS -r $MIRROR_DIR
+pigz -p $SLURM_NTASKS -dr $MIRROR_DIR
 if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"

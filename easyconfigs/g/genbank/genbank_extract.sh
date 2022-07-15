@@ -20,12 +20,12 @@ then
 fi
 
 VERSION=$1
-MIRROR_DIR=/private_stores/mirror/genbank
+MIRROR_DIR=/private_stores/mirror/genbank/${VERSION}
 
 
 echo "Extracting Files: `date "+%Y-%m-%d %k:%M:%S"`"
 
-pigz -p ${SLURM_NTASKS} -r ${MIRROR_DIR}
+pigz -p ${SLURM_NTASKS} -dr ${MIRROR_DIR}
 if [ $? -ne 0 ]
 then
         echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
