@@ -7,7 +7,7 @@ my $bioc_exclude="--exclude='bin'";
 my $cran_dir="/private_stores/mirror/R/cran";
 my $cran_exclude="--exclude='bin'";
 
-my @bioc_versions = ('3.8','3.9','3.10','3.12','3.14');
+my @bioc_versions = ('3.16');
 
 foreach my $version (@bioc_versions) {
 	

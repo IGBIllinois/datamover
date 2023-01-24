@@ -1,23 +1,23 @@
 #!/bin/bash
 # ----------------SLURM Parameters----------------
 #SBATCH -p admin
-#SBATCH -n 4
+#SBATCH -n 1
 #SBATCH --mem=20g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J DATABASE_extract
+#SBATCH -J gtdb_download
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-module load pigz/2.4-IGB-gcc-8.2.0
+module load lftp
 # ----------------Commands------------------------
 #
 # Replace DATABASE with name of database you are downloading
-# Replace WEBSITE with remote location of database#
+# Replace WEBSITE with remote location of database
 #
 
-DATABASE="example"
+DATABASE="gtdb"
 
 if [ -z "$1" ];
 then
@@ -28,20 +28,16 @@ fi
 VERSION=$1
 MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
-
-echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
-
-pigz -p ${SLURM_NTASKS} -dr ${MIRROR_DIR}
+echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files"
+mkdir -p ${MIRROR_DIR}
+lftp -c mirror https://data.gtdb.ecogenomic.org/releases/release${VERSION}/${VERSION}.0/ ${MIRROR_DIR}/
 if [ $? -ne 0 ]
 then
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
 	exit $?
 else
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files Complete"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Complete"
 fi
 
-echo "`date "+%Y-%m-%d %k:%M:%S"` Fix Permissions Start"
-find ${MIRROR_DIR} -type d -exec chmod 775 {} \;
-find ${MIRROR_DIR} -type f -exec chmod 664 {} \;
-echo "`date "+%Y-%m-%d %k:%M:%S"` Fix Permissions Completed"
+
 

@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J DATABASE_extract
+#SBATCH -J gtdb_extract
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
@@ -17,7 +17,7 @@ module load pigz/2.4-IGB-gcc-8.2.0
 # Replace WEBSITE with remote location of database#
 #
 
-DATABASE="example"
+DATABASE="gtdb"
 
 if [ -z "$1" ];
 then
@@ -31,7 +31,7 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
 
-pigz -p ${SLURM_NTASKS} -dr ${MIRROR_DIR}
+find ${MIRROR_DIR} -type f -name '*.tar' -exec tar -xf {} \;
 if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
