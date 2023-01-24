@@ -3,7 +3,6 @@
 use strict;
 
 my $bioc_dir="/private_stores/mirror/R/bioconductor";
-#my $bioc_exclude="--exclude='/bin/' --exclude='/bioc/bin/' --exclude='/data/annotation/bin/'";
 my $bioc_exclude="--exclude='bin'";
 my $cran_dir="/private_stores/mirror/R/cran";
 my $cran_exclude="--exclude='bin'";
@@ -13,7 +12,7 @@ my @bioc_versions = ('3.8','3.9','3.10','3.12','3.14');
 foreach my $version (@bioc_versions) {
 	
 	#Rsync the files
-	my $command ="rsync -e 'ssh -i ~/.ssh/id_rsa' -zrtlv --delete $bioc_exclude bioc-rsync\@master.bioconductor.org:$version $bioc_dir/packages/$version";
+	my $command ="rsync -e 'ssh -i ~/.ssh/id_rsa' -zrtlv --delete $bioc_exclude bioc-rsync\@master.bioconductor.org:$version/ $bioc_dir/packages/$version/";
 	print $command . "\n";
 	system($command);
 
