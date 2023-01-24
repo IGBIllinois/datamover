@@ -1,0 +1,29 @@
+easyblock = 'Bundle'
+
+name = 'BUSCO-db'
+version = '4'
+
+homepage = 'https://busco.ezlab.org/'
+description = """Based on evolutionarily-informed expectations of gene content of near-universal single-copy orthologs, BUSCO metric is complementary to technical metrics like N50."""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['file_versions.tsv'],
+        'dirs': ['information','lineages','placement_files'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
