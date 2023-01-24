@@ -1,0 +1,37 @@
+easyblock = 'Bundle'
+
+name = 'alphafold-db'
+version = '20220118'
+
+homepage = 'https://github.com/deepmind/alphafold/'
+description = """Alphafold Databases"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['bfd','mgnify','params','pdb70','pdb_mmcif','uniclust30','uniref90'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+<<<<<<< HEAD
+=======
+postinstallcmds = [
+	'find %(installdir)s -type f -exec chmod 664 {} \;',
+	'find %(installdir)s -type d -exec chmod 775 {} \;'
+]
+
+>>>>>>> 07a634badb5a92d2451430c240f6c34af2731a35
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
