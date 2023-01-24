@@ -1,10 +1,10 @@
 easyblock = 'Bundle'
 
-name = ''
-version = ''
+name = 'gtdb'
+version = '207'
 
-homepage = ''
-description = """"""
+homepage = 'https://gtdb.ecogenomic.org/'
+description = """GENOME TAXONOMY DATABASE"""
 
 toolchain = SYSTEM
 
@@ -15,7 +15,7 @@ dependencies = []
 
 sanity_check_paths = {
         'files': [],
-        'dirs': ['db','blastdb_v4','blastdb_v5','diamond'],
+        'dirs': ['auxillary_files','genomic_files_all','genomic_files_reps'],
 }
 
 modextrapaths = {

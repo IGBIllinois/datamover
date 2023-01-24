@@ -39,6 +39,8 @@ cd $FASTA_DIR && curl -s -O https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swisspro
 cd $FASTA_DIR && curl -s -O https://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz
 cd $FASTA_DIR && curl -s -O https://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz.md5
 cd $FASTA_DIR && curl -s -O https://ftp.ncbi.nlm.nih.gov/blast/db/README
+cd $FASTA_DIR && curl -s -O https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz
+cd $FASTA_DIR && curl -s -O https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz.md5
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading fasta files Complete"
 

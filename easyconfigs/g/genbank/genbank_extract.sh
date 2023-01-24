@@ -25,11 +25,11 @@ MIRROR_DIR=/private_stores/mirror/genbank/${VERSION}
 
 echo "Extracting Files: `date "+%Y-%m-%d %k:%M:%S"`"
 
-pigz -p ${SLURM_NTASKS} -dr ${MIRROR_DIR}
+find ${MIRROR_DIR} -type f -name '*.gz' -exec pigz -p ${SLURM_NTASKS} -dr {} \;
 if [ $? -ne 0 ]
 then
         echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
-        exit $?
+        exit $?;
 else
         echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files Complete"
 fi

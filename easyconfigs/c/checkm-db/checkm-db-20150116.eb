@@ -1,0 +1,30 @@
+easyblock = 'Bundle'
+
+name = 'checkm-db'
+version = '20150116'
+
+homepage = 'https://ecogenomics.github.io/CheckM/'
+description = """CheckM Database"""
+
+toolchain = SYSTEM
+
+#source_urls = ['https://data.ace.uq.edu.au/public/CheckM_databases/']
+#sources = ['checkm_data_2015_01_16.tar.gz']
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['selected_marker_sets.tsv','taxon_marker_sets.tsv'],
+        'dirs': ['distributions','genome_tree','hmms','hmms_ssu','img','pfam','test_data'],
+}
+
+modextrapaths = {
+	'BIODB':'',
+	'CHECKM_DATA_PATH': ''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
