@@ -2,7 +2,7 @@
 # ----------------SLURM Parameters----------------
 #SBATCH -p normal
 #SBATCH -n 8
-#SBATCH --mem=125g
+#SBATCH --mem=256g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
@@ -10,8 +10,8 @@
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-module load BLAST+/2.10.1-IGB-gcc-8.2.0
-module load DIAMOND/0.9.24-IGB-gcc-8.2.0
+module load BLAST+/2.13.0-IGB-gcc-8.2.0
+module load DIAMOND/2.0.15-IGB-gcc-8.2.0
 
 # ----------------Commands------------------------
 
@@ -27,7 +27,7 @@ MIRROR_DIR=/private_stores/mirror/ncbi-blastdb
 FASTA_DIR=$MIRROR_DIR/$VERSION/db
 BLASTV4_DIR=$MIRROR_DIR/$VERSION/blastdb_v4
 DIAMOND_DIR=$MIRROR_DIR/$VERSION/diamond
-DIAMOND_OPTS="--quiet --threads $SLURM_NTASKS"
+DIAMOND_OPTS="--ignore-warnings --quiet --threads $SLURM_NTASKS"
 
 FILES="$FASTA_DIR/nr
 $FASTA_DIR/nt

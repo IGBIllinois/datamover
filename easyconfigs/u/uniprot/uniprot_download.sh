@@ -1,15 +1,6 @@
-#!/bin/bash
-# ----------------SLURM Parameters----------------
-#SBATCH -p admin
-#SBATCH -n 1
-#SBATCH --mem=20g
-#SBATCH -N 1
-#SBATCH --mail-user=datamover@igb.illinois.edu
-#SBATCH --mail-type=ALL
-#SBATCH -J uniprot_download
-#SBATCH -D /home/a-m/datamover/jobs
-#SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
+module load globus-cli/3.10.1-IGB-gcc-8.2.0-Python-3.7.2
+
 # ----------------Commands------------------------
 
 if [ -z "$1" ];
@@ -24,16 +15,7 @@ FASTA_DIR=${MIRROR_DIR}/db
 
 echo "Downloading Files: `date "+%Y-%m-%d %k:%M:%S"`"
 mkdir -p ${FASTA_DIR}
-rsync -av --delete --exclude 'rdf' --exclude 'knowledgebase/pan_proteomes' --exclude 'knowledgebase/proteomics_mapping' \
---exclude 'knowledgebase/reference_proteomes' --exclude 'knowledgebase/variants' --exclude 'knowledgebase/genome_annotation_tracks' \
---exclude 'knowledgebase/taxonomic_divisions' rsync://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/ ${FASTA_DIR}
+globus transfer -r --exclude 'knowledgebase/reference_proteomes' --exclude 'knowledgebase/taxonomic_divisions' 'fd9c190c-b824-11e9-98d7-0a63aa6b37da:/gridftp/pub/databases/uniprot/current_release/' '1ccc563b-0542-44e5-a13c-fc4b00281b72:/private_stores/mirror/uniprot/${FASTA_DIR}/
 
-if [ $? -ne 0 ]
-then
-        echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
-        exit $?
-else
-        echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Complete"
-fi
 
 
