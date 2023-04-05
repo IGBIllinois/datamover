@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'alphafold-db'
-version = '20220118'
+version = '20230405'
 
 homepage = 'https://github.com/deepmind/alphafold/'
 description = """Alphafold Databases"""

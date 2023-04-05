@@ -1,0 +1,30 @@
+easyblock = 'Bundle'
+
+name = 'KneadData-db'
+version = '20230405'
+
+homepage = 'https://github.com/biobakery/kneaddata'
+description = """Databases for KneadData"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['human_hg38_refMrna.1.bt2','hg37dec_v0.1.1.bt2','SILVA_128_LSUParc_SSUParc_ribosomal_RNA.1.bt2l'],
+        'dirs': [],
+}
+
+modextrapaths = {
+	'BIODB':'',
+	'BOWTIE2_INDEXES': ''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
