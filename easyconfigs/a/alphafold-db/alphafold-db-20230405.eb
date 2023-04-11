@@ -15,7 +15,7 @@ dependencies = []
 
 sanity_check_paths = {
         'files': [],
-        'dirs': ['bfd','mgnify','params','pdb70','pdb_mmcif','uniclust30','uniref90'],
+        'dirs': ['bfd','mgnify','params','pdb70','pdb_mmcif','uniref90'],
 }
 
 modextrapaths = {

@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'kraken2-db'
-version = '20220327'
+version = '20230314'
 
 homepage = 'https://benlangmead.github.io/aws-indexes/k2'
 description = """Kraken 2 is a system for assigning taxonomic labels to short DNA sequences, usually obtained through metagenomic studies. """
@@ -14,8 +14,8 @@ sources = []
 dependencies = []
 
 sanity_check_paths = {
-        'files': ['hash.k2d','seqid2taxid.map'],
-        'dirs': ['library','taxonomy'],
+        'files': [],
+        'dirs': ['k2_standard','k2_pluspfp','k2_pluspf','k2_minusb','k2_viral','k2_eupathdb48'],
 }
 
 modextrapaths = {
