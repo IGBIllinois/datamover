@@ -1,0 +1,29 @@
+easyblock = 'Bundle'
+
+name = 'foldseek-db'
+version = '20230921'
+
+homepage = 'https://github.com/steineggerlab/foldseek'
+description = """Foldseek computes for each match a simple estimate for the probability that the match is a true positive match given its structural bit score. Here, hits within the same superfamily are TP, hits to another fold are FP, and hits to the same family or to another superfamily are ignored."""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['afdb/afdb','pdb/pdb'],
+        'dirs': ['afdb','pdb'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

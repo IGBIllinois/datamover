@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'gtdb'
-version = '207'
+version = '214'
 
 homepage = 'https://gtdb.ecogenomic.org/'
 description = """GENOME TAXONOMY DATABASE"""
@@ -20,7 +20,7 @@ sanity_check_paths = {
 
 modextrapaths = {
 	'BIODB':'',
-	'GTDBTK_DATA_PATH': 'auxillary_files/release214_v2'
+	'GTDBTK_DATA_PATH': 'auxillary_files/release214'
 }
 
 keeppreviousinstall = True

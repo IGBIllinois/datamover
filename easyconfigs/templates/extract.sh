@@ -29,8 +29,19 @@ VERSION=$1
 MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 
-echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
+echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting tar.gz Files"
+for f in $(find ${MIRROR_DIR} -name '*.tar.gz');
+do
+	tar -xvzf $f -C dirname $f
+	if [ $? -ne 0 ]; then
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Error extracting file: $f"
+                exit $?
+        else
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Done extracting file: $f"
+        fi
+done
 
+echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting .gz Files with Pigz"
 pigz -p ${SLURM_NTASKS} -dr ${MIRROR_DIR}
 if [ $? -ne 0 ]
 then

@@ -1,20 +1,5 @@
-#!/bin/bash
-# ----------------SLURM Parameters----------------
-#SBATCH -p admin
-#SBATCH -n 1
-#SBATCH --mem=20g
-#SBATCH -N 1
-#SBATCH --mail-user=datamover@igb.illinois.edu
-#SBATCH --mail-type=ALL
-#SBATCH -J interpro_download
-#SBATCH -D /home/a-m/datamover/jobs
-#SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-# ----------------Commands------------------------
-#
-# Replace DATABASE with name of database you are downloading
-# Replace WEBSITE with remote location of database
-#
+module load globus-cli/3.18.0-IGB-gcc-8.2.0-Python-3.7.2
 
 DATABASE="interpro"
 
@@ -29,14 +14,6 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files"
 mkdir -p ${MIRROR_DIR}
-rsync -av rsync://ftp.ebi.ac.uk/pub/databases/interpro/${VERSION}/ ${MIRROR_DIR}/
-if [ $? -ne 0 ]
-then
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
-	exit $?
-else
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Complete"
-fi
-
+globus transfer -r --exclude "reference_proteomes" --exclude "taxonomic_divisions" "47772002-3e5b-4fd3-b97c-18cee38d6df2:/pub/databases/interpro/releases/$VERSION/" "1ccc563b-0542-44e5-a13c-fc4b00281b72:${MIRROR_DIR}/"
 
 

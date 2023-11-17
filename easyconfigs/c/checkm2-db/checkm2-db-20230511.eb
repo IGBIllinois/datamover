@@ -1,0 +1,31 @@
+easyblock = 'Bundle'
+
+name = 'checkm2-db'
+version = '20230511'
+
+homepage = 'https://github.com/chklovski/CheckM2'
+description = """CheckM2 Database"""
+
+toolchain = SYSTEM
+
+#source_urls = []
+#sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['CheckM2_database/uniref100.KO.1.dmnd'],
+        'dirs': [],
+}
+
+modextrapaths = {
+	'BIODB':'',
+	'CHECKM2DB': 'CheckM2_database/uniref100.KO.1.dmnd'
+	
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

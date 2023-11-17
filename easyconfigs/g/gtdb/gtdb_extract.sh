@@ -31,7 +31,7 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
 
-find ${MIRROR_DIR} -type f -name '*.tar' -exec tar -xf {} \;
+find ${MIRROR_DIR} -type f -name '*.tar.gz' -execdir tar -I pigz -xvf {} \;
 if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"

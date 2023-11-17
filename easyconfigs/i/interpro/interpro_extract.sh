@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J DATABASE_extract
+#SBATCH -J interpro_extract
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
@@ -17,7 +17,7 @@ module load pigz/2.4-IGB-gcc-8.2.0
 # Replace WEBSITE with remote location of database#
 #
 
-DATABSE="interpro"
+DATABASE="interpro"
 
 if [ -z "$1" ];
 then
@@ -30,8 +30,18 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
+for f in $(find ${MIRROR_DIR} -name '*.tar.gz');
+do
+	tar -xvzf $f -C dirname $f
+	if [ $? -ne 0 ]; then
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Error extracting file: $f"
+                exit 1
+        else
+                echo "`date "+%Y-%m-%d %k:%M:%S"` Done extracting file: $f"
+        fi
+done
 
-pigz -p ${SLURM_NTASKS} -dr ${MIRROR_DIR}
+pigz -p $SLURM_NTASKS -dr $MIRROR_DIR
 if [ $? -ne 0 ]
 then
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"

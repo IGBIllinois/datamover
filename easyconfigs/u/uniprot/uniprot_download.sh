@@ -1,5 +1,5 @@
 # ----------------Load Modules--------------------
-module load globus-cli/3.10.1-IGB-gcc-8.2.0-Python-3.7.2
+module load globus-cli/3.18.0-IGB-gcc-8.2.0-Python-3.7.2
 
 # ----------------Commands------------------------
 
@@ -15,7 +15,7 @@ FASTA_DIR=${MIRROR_DIR}/db
 
 echo "Downloading Files: `date "+%Y-%m-%d %k:%M:%S"`"
 mkdir -p ${FASTA_DIR}
-globus transfer -r --exclude 'knowledgebase/reference_proteomes' --exclude 'knowledgebase/taxonomic_divisions' 'fd9c190c-b824-11e9-98d7-0a63aa6b37da:/gridftp/pub/databases/uniprot/current_release/' '1ccc563b-0542-44e5-a13c-fc4b00281b72:/private_stores/mirror/uniprot/${FASTA_DIR}/
+globus transfer -r --exclude "reference_proteomes" --exclude "taxonomic_divisions" "47772002-3e5b-4fd3-b97c-18cee38d6df2:/pub/databases/uniprot/current_release/" "1ccc563b-0542-44e5-a13c-fc4b00281b72:${FASTA_DIR}/"
 
 
 
