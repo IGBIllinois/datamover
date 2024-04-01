@@ -1,0 +1,33 @@
+easyblock = 'Bundle'
+
+name = 'tailseeker-db'
+version = '20161215'
+
+homepage = 'https://github.com/hyeshik/tailseeker'
+description = """Database Indexes for Tailseeker"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['refdb'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+modextravars = {
+	'TAILSEEKER_DATADIR': '%(installdir)s/refdb'
+
+}
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\refdb\n"
+

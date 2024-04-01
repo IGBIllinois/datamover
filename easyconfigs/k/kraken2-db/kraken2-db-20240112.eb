@@ -1,0 +1,29 @@
+easyblock = 'Bundle'
+
+name = 'kraken2-db'
+version = '20240112'
+
+homepage = 'https://benlangmead.github.io/aws-indexes/k2'
+description = """Kraken 2 is a system for assigning taxonomic labels to short DNA sequences, usually obtained through metagenomic studies. """
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['k2_standard','k2_pluspfp','k2_pluspf','k2_minusb','k2_viral','k2_eupathdb48'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

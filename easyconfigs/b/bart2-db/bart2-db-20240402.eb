@@ -1,0 +1,29 @@
+easyblock = 'Bundle'
+
+name = 'bart2-db'
+version = '20240402'
+
+homepage = 'https://github.com/zanglab/bart2'
+description = """Databases for Bart2"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['hg38_library','mm10_library'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+
