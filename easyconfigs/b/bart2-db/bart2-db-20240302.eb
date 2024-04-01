@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'bart2-db'
-version = '20240402'
+version = '20240302'
 
 homepage = 'https://github.com/zanglab/bart2'
 description = """Databases for Bart2"""
