@@ -1,0 +1,27 @@
+easyblock = 'Bundle'
+
+name = 'checkv-db'
+version = '1.5'
+
+homepage = 'https://portal.nersc.gov/CheckV/'
+description = """The main change in v1.5 was to remove putatively non-viral sequences to minimize high-confidence matches to the CheckV database for non-viral sequences."""
+
+toolchain = SYSTEM
+
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['checkv-db-v1.5'],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

@@ -1,21 +1,21 @@
-easyblock = 'Tarball'
+easyblock = 'Bundle'
 
-name = 'pgap-db'
-version = '2021-07-01.build5508'
+name = 'dorado-db'
+version = '20240501'
 
-homepage = ''
-description = """"""
+homepage = 'https://github.com/nanoporetech/dorado'
+description = """Databases for dorado"""
 
 toolchain = SYSTEM
 
-source_urls = ['https://s3.amazonaws.com/pgap/']
-sources = ['input-%(version)s.tgz']
+source_urls = ['']
+sources = []
 
 dependencies = []
 
 sanity_check_paths = {
         'files': [],
-        'dirs': ['16S_rRNA','23S_rRNA','uniColl_path'],
+        'dirs': ['dna_r9.4.1_e8_fast@v3.4'],
 }
 
 modextrapaths = {

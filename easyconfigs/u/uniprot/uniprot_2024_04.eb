@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'uniprot'
-version = '2023_05'
+version = '2024_04'
 
 
 homepage = 'https://www.uniprot.org/'

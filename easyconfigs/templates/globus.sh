@@ -13,7 +13,7 @@ VERSION=$1
 DATABASE=""
 MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 FASTA_DIR=${MIRROR_DIR}/db
-BIOTRANSFER_UUID="1ccc563b-0542-44e5-a13c-fc4b00281b72"
+BIOTRANSFER_UUID="4a467fda-f559-4fc3-b54a-e2842f439e06"
 SOURCE_UUID=""
 
 echo "Downloading Files: `date "+%Y-%m-%d %k:%M:%S"`"
