@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J interpro_extract
+#SBATCH -J ena_extract
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
@@ -17,7 +17,7 @@ module load pigz/2.4-IGB-gcc-8.2.0
 # Replace WEBSITE with remote location of database#
 #
 
-DATABASE="interpro"
+DATABASE="ena"
 
 if [ -z "$1" ];
 then

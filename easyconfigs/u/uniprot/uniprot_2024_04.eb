@@ -20,11 +20,11 @@ sanity_check_paths = {
 		'db/uniref/uniref90/uniref90.fasta',
 		'db/uniref/uniref50/uniref50.fasta'
 	],
-        'dirs': ['db','blastdb_v4','blastdb_v5','diamond']
+        'dirs': ['db','blastdb_v5','diamond']
 }
 
 modextrapaths = {'BIODB':'db',
-	'BLASTDB': ['blastdb_v4','blastdb_v5'],
+	'BLASTDB': ['blastdb_v5'],
 	'DIAMONDDB': 'diamond',
 }
 

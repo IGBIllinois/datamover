@@ -25,7 +25,6 @@ fi
 VERSION=$1
 MIRROR_DIR=/private_stores/mirror/uniprot
 FASTA_DIR=$MIRROR_DIR/$VERSION/db
-BLASTV4_DIR=$MIRROR_DIR/$VERSION/blastdb_v4
 BLASTV5_DIR=$MIRROR_DIR/$VERSION/blastdb_v5
 DIAMOND_DIR=$MIRROR_DIR/$VERSION/diamond
 DIAMOND_OPTS="--quiet --threads $SLURM_NTASKS"
@@ -39,7 +38,6 @@ fi
 
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Directories"
-mkdir -p $BLASTV4_DIR
 mkdir -p $BLASTV5_DIR
 mkdir -p $DIAMOND_DIR
 
@@ -50,17 +48,6 @@ for f in ${FASTA_FILES[@]};  do
 	FASTA_NAME=`basename $f`
 	DB_NAME=`basename $f .fasta`
 	
-	#Make blast v4 indexes
-        echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v4 Index for File: $FULL_PATH"
-
-	makeblastdb -dbtype prot -title $DB_NAME -in $FULL_PATH -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
-	if [ $? -ne 0 ]; then
-		echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating Blast v4 index for file: $FULL_PATH"
-		exit 1
-	else
-		echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating Blast v4 Index for File: $FULL_PATH"
-	fi
-
 	#Make blast v5 indexes
         echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v5 Index for File: $FULL_PATH"
 	makeblastdb -dbtype prot -title $DB_NAME -in $FULL_PATH -out $BLASTV5_DIR/$DB_NAME -blastdb_version 5

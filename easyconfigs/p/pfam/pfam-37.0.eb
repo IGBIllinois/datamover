@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'pfam'
+version = '37.0'
+
+homepage = 'https://pfam.xfam.org/'
+description = """The Pfam database is a large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['Pfam-A.fasta'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database and indexes are located at %(installdir)s\n"
+
