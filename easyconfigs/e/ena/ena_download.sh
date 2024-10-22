@@ -1,5 +1,5 @@
 # ----------------Load Modules--------------------
-module load globus-cli/3.18.0-IGB-gcc-8.2.0-Python-3.7.2
+module load globus-cli/3.30.1-IGB-gcc-8.2.0-Python-3.10.1
 
 # ----------------Commands------------------------
 

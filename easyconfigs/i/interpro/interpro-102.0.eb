@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'interpro'
+version = '102.0'
+
+homepage = 'https://www.ebi.ac.uk/interpro/'
+description = """InterPro provides functional analysis of proteins by classifying them into families and predicting domains and important sites."""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['interpro.xml'],
+        'dirs': [],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

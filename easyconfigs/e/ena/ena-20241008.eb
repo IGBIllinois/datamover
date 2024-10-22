@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'ena'
-version = '20240909'
+version = '20241008'
 
 homepage = 'https://www.ebi.ac.uk/ena'
 description = """The European Nucleotide Archive (ENA) captures and presents information relating to experimental workflows that are based around nucleotide sequencing. """
