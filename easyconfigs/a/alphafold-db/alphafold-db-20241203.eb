@@ -1,0 +1,43 @@
+easyblock = 'Bundle'
+
+name = 'alphafold-db'
+version = '20241203'
+
+homepage = 'https://github.com/deepmind/alphafold/'
+description = """Alphafold Databases"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [
+		'mgy_clusters_2022_05.fa',
+		'bfd-first_non_consensus_sequences.fasta',
+		'uniref90_2022_05.fa',
+		'uniprot_all_2021_04.fa',
+		'pdb_seqres_2022_09_28.fasta',
+		'rnacentral_active_seq_id_90_cov_80_linclust.fasta',
+		'nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta',
+		'rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta'
+	],
+        'dirs': [],
+}
+
+modextrapaths = {
+	'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+postinstallcmds = [
+	'find %(installdir)s -type f -exec chmod 664 {} \;',
+	'find %(installdir)s -type d -exec chmod 775 {} \;'
+]
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

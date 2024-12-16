@@ -1,0 +1,38 @@
+easyblock = 'Bundle'
+
+name = 'uniprot'
+version = '2024_06'
+
+
+homepage = 'https://www.uniprot.org/'
+description = """The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information. """
+
+toolchain = SYSTEM
+
+dependencies = []
+
+
+sanity_check_paths = {
+        'files': ['db/knowledgebase/complete/uniprot_sprot.fasta',
+		'db/knowledgebase/complete/uniprot_trembl.fasta',
+		'db/knowledgebase/idmapping/idmapping.dat',
+		'db/uniref/uniref100/uniref100.fasta',
+		'db/uniref/uniref90/uniref90.fasta',
+		'db/uniref/uniref50/uniref50.fasta'
+	],
+        'dirs': ['db','blastdb_v5','diamond']
+}
+
+modextrapaths = {'BIODB':'db',
+	'BLASTDB': ['blastdb_v5'],
+	'DIAMONDDB': 'diamond',
+}
+
+keeppreviousinstall = True
+
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database and indexes are located at %(installdir)s/\n"
+
+##Helpful documentation
+#https://embl.service-now.com/kb?id=kb_article_view&sysparm_article=KB0011060
