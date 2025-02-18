@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'ena'
+version = '20250211'
+
+homepage = 'https://www.ebi.ac.uk/ena'
+description = """The European Nucleotide Archive (ENA) captures and presents information relating to experimental workflows that are based around nucleotide sequencing. """
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': ['sequence','wgs'],
+}
+
+modextrapaths = {'BIODB':''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+

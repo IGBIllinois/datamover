@@ -10,8 +10,7 @@
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-module load BLAST+/2.13.0-IGB-gcc-8.2.0
-module load DIAMOND/2.0.15-IGB-gcc-8.2.0
+module load DIAMOND/2.1.11-IGB-gcc-8.2.0
 
 # ----------------Commands------------------------
 
@@ -25,7 +24,6 @@ fi
 VERSION=$1
 MIRROR_DIR=/private_stores/mirror/ncbi-blastdb
 FASTA_DIR=$MIRROR_DIR/$VERSION/db
-BLASTV4_DIR=$MIRROR_DIR/$VERSION/blastdb_v4
 DIAMOND_DIR=$MIRROR_DIR/$VERSION/diamond
 DIAMOND_OPTS="--ignore-warnings --quiet --threads $SLURM_NTASKS"
 
@@ -43,7 +41,6 @@ fi
 
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Directories"
-mkdir -p $BLASTV4_DIR
 mkdir -p $DIAMOND_DIR
 
 for f in $FILES
@@ -53,20 +50,6 @@ do
 	FASTA_NAME=`basename $f`
 	DB_NAME=`basename $f .fasta`
 	
-	#Make blast v4 indexes
-        echo "`date "+%Y-%m-%d %k:%M:%S"` Creating Blast v4 Index for File: $f"
-	if [ `basename $f` == 'nt' ]; then
-		makeblastdb -dbtype nucl -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
-	else
-		makeblastdb -dbtype prot -title $DB_NAME -in $f -out $BLASTV4_DIR/$DB_NAME -blastdb_version 4
-	fi
-	if [ $? -ne 0 ]; then
-		echo "`date "+%Y-%m-%d %k:%M:%S"` Error creating Blast v4 index for file: $f"
-		exit 1
-	else
-		echo "`date "+%Y-%m-%d %k:%M:%S"` Done Creating Blast v4 Index for File: $f"
-	fi
-
 	#Make Diamond indexes
 	echo "`date "+%Y-%m-%d %k:%M:%S"` Creating diamond Index for File: $f"
         diamond makedb $DIAMOND_OPTS --in $f --db $DIAMOND_DIR/$DB_NAME
