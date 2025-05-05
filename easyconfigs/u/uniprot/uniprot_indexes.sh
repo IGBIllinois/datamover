@@ -10,8 +10,8 @@
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-module load BLAST+/2.13.0-IGB-gcc-8.2.0
-module load DIAMOND/2.0.15-IGB-gcc-8.2.0
+module load BLAST+/2.16.0-IGB-gcc-8.2.0
+module load DIAMOND/2.1.11-IGB-gcc-8.2.0
 
 # ----------------Commands------------------------
 

@@ -3,8 +3,8 @@ easyblock = 'Tarball'
 name = 'pgap-db'
 version = '2021-07-01.build5508'
 
-homepage = ''
-description = """"""
+homepage = 'https://github.com/ncbi/pgap'
+description = """Databases for pgap"""
 
 toolchain = SYSTEM
 
