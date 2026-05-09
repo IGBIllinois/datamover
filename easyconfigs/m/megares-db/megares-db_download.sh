@@ -1,23 +1,22 @@
 #!/bin/bash
 # ----------------SLURM Parameters----------------
 #SBATCH -p admin
-#SBATCH -n 4
+#SBATCH -n 1
 #SBATCH --mem=20g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J gtdb_delete
+#SBATCH -J megares-db_download
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-module load pigz/2.4-IGB-gcc-8.2.0
 # ----------------Commands------------------------
 #
 # Replace DATABASE with name of database you are downloading
-# Replace WEBSITE with remote location of database#
+# Replace WEBSITE with remote location of database
 #
 
-DATABASE="gtdb"
+DATABASE="megares-db"
 
 if [ -z "$1" ];
 then
@@ -26,18 +25,18 @@ then
 fi
 
 VERSION=$1
-MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
+MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}/db
 
-
-echo "`date "+%Y-%m-%d %k:%M:%S"` Deleting tar.gz Files"
-
-find ${MIRROR_DIR} -type f -name '*.tar.gz' -exec rm -f {} \;
+echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files"
+mkdir -p ${MIRROR_DIR}
+wget https://www.meglab.org/downloads/megares_v${VERSION}.zip -O ${MIRROR_DIR}/megares_v${VERSION}.zip
 if [ $? -ne 0 ]
 then
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Delete files Failed"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Failed"
 	exit $?
 else
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Delete Files Complete"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Downloading Files Complete"
 fi
+
 
 

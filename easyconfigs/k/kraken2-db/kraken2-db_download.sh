@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J DATABASE_download
+#SBATCH -J kraken2-db_download
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
@@ -35,7 +35,8 @@ mkdir -p ${MIRROR_DIR}/k2_minusb
 wget -P $MIRROR_DIR/k2_minusb https://genome-idx.s3.amazonaws.com/kraken/k2_minusb_${VERSION}.tar.gz
 mkdir -p ${MIRROR_DIR}/k2_standard
 wget -P $MIRROR_DIR/k2_standard https://genome-idx.s3.amazonaws.com/kraken/k2_standard_${VERSION}.tar.gz
-wget -P $MIRROR_DIR https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08gb_${VERSION}.tar.gz
+mkdir -p ${MIRROR_DIR}/k2_standard_8gb
+wget -P $MIRROR_DIR/k2_standard_8gb https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08gb_${VERSION}.tar.gz
 mkdir -p ${MIRROR_DIR}/k2_standard_16gb
 wget -P $MIRROR_DIR/k2_standard_16gb  https://genome-idx.s3.amazonaws.com/kraken/k2_standard_16gb_${VERSION}.tar.gz
 mkdir -p ${MIRROR_DIR}/k2_pluspf
@@ -49,11 +50,13 @@ wget -P $MIRROR_DIR/k2_pluspfp https://genome-idx.s3.amazonaws.com/kraken/k2_plu
 mkdir -p ${MIRROR_DIR}/k2_pluspfp_08gb
 wget -P $MIRROR_DIR/k2_pluspfp_08gb https://genome-idx.s3.amazonaws.com/kraken/k2_pluspfp_08gb_${VERSION}.tar.gz
 mkdir -p ${MIRROR_DIR}/k2_pluspfp_16gb
-wget -P $MIRROR_DIR/k2_pluspfp_16gb https://genome-idx.s3.amazonaws.com/kraken/k2_pluspfp_16gb_${VERSION}.tar.gz
+wget -P ${MIRROR_DIR}/k2_pluspfp_16gb https://genome-idx.s3.amazonaws.com/kraken/k2_pluspfp_16gb_${VERSION}.tar.gz
 mkdir -p ${MIRROR_DIR}/k2_eupathdb48
 wget -P $MIRROR_DIR/k2_eupathdb48 https://genome-idx.s3.amazonaws.com/kraken/k2_eupathdb48_20230407.tar.gz
-mkdir -p ${MIRROR_DIR|/k2_nt
-wget -P $MIRROR_DIR/k2_nt https://genome-idx.s3.amazonaws.com/kraken/k2_nt_20231129.tar.gz
+mkdir -p ${MIRROR_DIR}/k2_nt
+wget -P ${MIRROR_DIR}/k2_nt https://genome-idx.s3.amazonaws.com/kraken/k2_nt_20251015.tar.gz
+mkdir -p ${MIRROR_DIR}/k2_gtdb
+wget -P ${MIRROR_DIR}/k2_gtdb https://genome-idx.s3.amazonaws.com/kraken/k2_gtdb_genome_reps_20250609.tar.gz
 
 
 

@@ -20,7 +20,7 @@ sanity_check_paths = {
 
 modextrapaths = {
 	'BIODB':'',
-	'GTDBTK_DATA_PATH': 'auxillary_files/release214_v2'
+	'GTDBTK_DATA_PATH': 'auxillary_files/release%(versions)_v2'
 }
 
 keeppreviousinstall = True

@@ -1,8 +1,8 @@
 #!/bin/bash
 # ----------------SLURM Parameters----------------
 #SBATCH -p admin
-#SBATCH -n 4
-#SBATCH --mem=20g
+#SBATCH -n 1
+#SBATCH --mem=15g
 #SBATCH -N 1
 #SBATCH --mail-user=datamover@igb.illinois.edu
 #SBATCH --mail-type=ALL
@@ -10,7 +10,6 @@
 #SBATCH -D /home/a-m/datamover/jobs
 #SBATCH -o %x-%j.out
 # ----------------Load Modules--------------------
-module load pigz/2.4-IGB-gcc-8.2.0
 # ----------------Commands------------------------
 #
 # Replace DATABASE with name of database you are downloading
@@ -31,13 +30,24 @@ MIRROR_DIR=/private_stores/mirror/${DATABASE}/${VERSION}
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files"
 
-find ${MIRROR_DIR} -type f -name '*.tar.gz' -execdir tar -I pigz -xvf {} \;
+find ${MIRROR_DIR} -path '${MIRROR_DIR}/auxillary_files/gtdbtk_package/full_package/release$VERSION' -prune -o  -path '${MIRROR_DIR}/genomic_files_reps/gtdb_genomes_reps_r$VERSION' -prune -o -type f -name '*.tar.gz' -execdir tar -xf {} \;
 if [ $? -ne 0 ]
 then
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting files Failed"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting tar.gz files Failed"
 	exit $?
 else
-	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting Files Complete"
+	echo "`date "+%Y-%m-%d %k:%M:%S"` Extracting tar.gz Files Complete"
+fi
+
+echo "`date "+%Y-%m-%d %k:%M:%S"` Deleting tar.gz Files"
+
+find ${MIRROR_DIR} -path '${MIRROR_DIR}/auxillary_files/gtdbtk_package/full_package/release$VERSION' -prune -o -path '${MIRROR_DIR}/genomic_files_reps/gtdb_genomes_reps_r$VERSION' -prune -o -type f -name '*.tar.gz' -exec rm -f {} \;
+if [ $? -ne 0 ]
+then
+        echo "`date "+%Y-%m-%d %k:%M:%S"` Delete files Failed"
+        exit $?
+else
+        echo "`date "+%Y-%m-%d %k:%M:%S"` Delete Files Complete"
 fi
 
 echo "`date "+%Y-%m-%d %k:%M:%S"` Fix Permissions Start"
