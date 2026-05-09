@@ -1,0 +1,32 @@
+easyblock = 'Bundle'
+
+name = 'metaphlan4-db'
+version = '20260509'
+
+homepage = 'https://github.com/biobakery/MetaPhlAn/'
+description = """MetaPhlAn Databases"""
+
+toolchain = SYSTEM
+
+source_urls = ['']
+sources = []
+
+dependencies = []
+
+sanity_check_paths = {
+        'files': ['mpa_latest'],
+        'dirs': [],
+}
+
+modextrapaths = {
+	'BIODB':'',
+	'DEFAULT_DB_FOLDER': ''
+}
+
+keeppreviousinstall = True
+moduleclass = 'data'
+
+modloadmsg = "%(name)s/%(version)s database is located at %(installdir)s\n"
+modloadmsg += "DEFAULT_DB_FOLDER environment variable is set to this location\n"
+
+
